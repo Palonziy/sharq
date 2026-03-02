@@ -1,0 +1,996 @@
+/* ========================================
+   GENERAL OVERRIDES
+   ======================================== */
+
+#root > section:nth-of-type(2),
+#root > section:nth-of-type(8) {
+  background: hsl(40 30% 94%) !important;
+}
+
+.dark #root > section:nth-of-type(2),
+.dark #root > section:nth-of-type(8) {
+  background: hsl(30 15% 8%) !important;
+}
+
+/* Scroll reveal effects */
+.reveal-item {
+  transform: translateY(20px) scale(.98);
+  transition: transform .6s cubic-bezier(.2, .9, .2, 1);
+  will-change: transform;
+}
+
+.reveal-item.is-visible {
+  transform: none;
+}
+
+/* Accessibility */
+@media (prefers-reduced-motion: reduce) {
+  [data-aos], [data-aos] * {
+    transition: none !important;
+    animation: none !important;
+    transform: none !important;
+  }
+}
+
+/* ========================================
+   MENTORING SECTION - Video-only (full-width)
+   ======================================== */
+
+/* Keep the existing rounded card look but show only the video full-bleed inside it */
+[class*="rounded-3xl"].mentoring-processed {
+  padding: 0 !important;
+  overflow: hidden;
+  background: transparent !important;
+  border: 0;
+  max-width: 1100px;
+  margin: 0 auto;
+  border-radius: 1rem;
+  aspect-ratio: 16 / 9;
+}
+
+.mentoring-video-wrapper {
+  width: 100%;
+  height: 100%;
+  display: block;
+  background: #000;
+}
+
+.mentoring-video {
+  width: 100% !important;
+  height: 100% !important;
+  display: block;
+  object-fit: contain; /* show full vertical video inside wider containers */
+  border: 0;
+  margin: 0 auto;
+}
+
+/* Mobile: make video taller (portrait-like) and limit height */
+@media (max-width: 640px) {
+  [class*="rounded-3xl"].mentoring-processed {
+    aspect-ratio: 9 / 16;
+    max-height: 80vh;
+  }
+
+  .mentoring-video {
+    height: auto;
+    max-height: 80vh;
+    object-fit: cover; /* on small screens fill the vertical container */
+  }
+}
+
+@media (min-width: 641px) and (max-width: 1024px) {
+  [class*="rounded-3xl"].mentoring-processed {
+    aspect-ratio: 4 / 3;
+  }
+}
+
+/* Fallback styling when video cannot be played */
+.mentoring-video-fallback {
+  padding: 2rem;
+  text-align: center;
+  background: hsl(0 0% 6% / 0.02);
+  color: hsl(var(--foreground));
+  border-radius: 0.75rem;
+}
+.mentoring-video-fallback a {
+  display: inline-block;
+  margin-top: 0.75rem;
+  background: var(--gradient-gold);
+  color: hsl(var(--primary-foreground));
+  padding: 0.5rem 1rem;
+  border-radius: 0.5rem;
+  text-decoration: none;
+}
+
+/* ========================================
+   FOOTER YOUTUBE LINK
+   ======================================== */
+
+.footer-center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 1rem 0;
+}
+
+.footer-youtube-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem 1rem;
+  background: #ff0000;
+  color: #fff !important;
+  text-decoration: none;
+  border-radius: 0.5rem;
+  font-weight: 600;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.footer-youtube-link:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(255, 0, 0, 0.3);
+}
+
+.footer-youtube-link svg {
+  display: block;
+}
+
+/* ========================================
+   OFFERS/PRICING SECTION STYLES
+   ======================================== */
+
+#offers {
+  padding: 4rem 2rem;
+  background: linear-gradient(180deg, hsl(40 30% 97%) 0%, hsl(38 30% 94%) 100%);
+  margin: 4rem 0;
+}
+
+.dark #offers {
+  background: linear-gradient(180deg, hsl(30 15% 10%) 0%, hsl(30 15% 12%) 100%);
+}
+
+/* Heading: separate, centered title above the grid */
+#offers-heading {
+  display: block;
+  max-width: 960px;
+  margin: 0 auto 2.5rem;
+  text-align: center;
+  font-family: var(--font-serif);
+  font-size: 2.25rem;
+  font-weight: 700;
+  color: hsl(var(--foreground));
+  letter-spacing: -0.02em;
+  line-height: 1.05;
+}
+
+@media (min-width: 640px) {
+  #offers-heading {
+    font-size: 2.75rem;
+    margin-bottom: 3rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  #offers-heading {
+    font-size: 3rem;
+    margin-bottom: 3.5rem;
+  }
+}
+
+.offers-container {
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+.offers-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 2rem;
+  width: 100%;
+  align-items: stretch;
+}
+
+@media (min-width: 640px) {
+  .offers-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 1024px) {
+  .offers-grid {
+    /* Desktop: 3 columns for modules, bundle will sit on its own second row */
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+.offer-card {
+  background: var(--gradient-card);
+  border: 1px solid hsl(var(--border));
+  border-radius: 1.25rem;
+  padding: 2.5rem 2rem;
+  box-shadow: var(--shadow-soft);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  height: 100%;
+}
+
+.offer-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 40px -8px hsl(38 70% 50% / 0.2);
+}
+
+.offer-card.featured {
+  border: 2px solid hsl(var(--gold));
+  background: linear-gradient(180deg, hsl(40 35% 98%) 0%, hsl(38 32% 96%) 100%);
+  position: relative;
+  padding-top: 3.5rem;
+}
+
+.offer-card.featured::before {
+  content: "⭐ TAVSIYA ETILADI";
+  position: absolute;
+  top: -1rem;
+  left: 50%;
+  transform: translateX(-50%);
+  background: var(--gradient-gold);
+  color: hsl(var(--primary-foreground));
+  padding: 0.5rem 1.5rem;
+  border-radius: 9999px;
+  font-size: 0.875rem;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  box-shadow: var(--shadow-gold);
+}
+
+.offer-icon {
+  font-size: 2.5rem;
+  margin-bottom: 1rem;
+  display: block;
+}
+
+.offer-title {
+  font-family: var(--font-serif);
+  font-size: 1.75rem;
+  font-weight: 600;
+  color: hsl(var(--foreground));
+  margin-bottom: 1rem;
+  line-height: 1.3;
+}
+
+.offer-subtitle {
+  color: hsl(var(--muted-foreground));
+  font-size: 1.125rem;
+  margin-bottom: 1.5rem;
+  line-height: 1.5;
+}
+
+.offer-description {
+  color: hsl(var(--muted-foreground));
+  font-size: 1rem;
+  line-height: 1.6;
+  margin-bottom: 1.5rem;
+}
+
+.offer-features {
+  list-style: none;
+  padding: 0;
+  margin: 1.5rem 0;
+  flex-grow: 1;
+}
+
+.offer-features li {
+  color: hsl(var(--foreground));
+  font-size: 0.95rem;
+  padding: 0.75rem 0;
+  margin-left: 1.75rem;
+  position: relative;
+  line-height: 1.5;
+}
+
+.offer-features li::before {
+  content: "✓";
+  position: absolute;
+  left: -1.75rem;
+  color: hsl(var(--gold));
+  font-weight: 700;
+  font-size: 1.2rem;
+}
+
+.offer-bonus {
+  background: hsl(var(--gold-light) / 0.15);
+  border: 1px solid hsl(var(--gold-light) / 0.3);
+  border-radius: 0.75rem;
+  padding: 1rem;
+  margin: 1.5rem 0;
+  font-size: 0.95rem;
+  color: hsl(var(--foreground));
+  font-weight: 500;
+}
+
+.offer-bonus strong {
+  color: hsl(var(--gold-dark));
+}
+
+.offer-price {
+  font-size: 2rem;
+  font-weight: 700;
+  color: hsl(var(--gold-dark));
+  margin: 1.5rem 0 1rem 0;
+  font-family: var(--font-serif);
+}
+
+.offer-currency {
+  font-size: 0.9rem;
+  color: hsl(var(--muted-foreground));
+}
+
+.offer-cta {
+  display: inline-block;
+  background: var(--gradient-gold);
+  color: hsl(var(--primary-foreground));
+  padding: 1rem 2rem;
+  border-radius: 9999px;
+  text-decoration: none;
+  font-weight: 600;
+  text-align: center;
+  margin-top: 1.5rem;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: var(--shadow-gold);
+  border: none;
+  cursor: pointer;
+  font-size: 1rem;
+}
+
+.offer-cta:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 12px 35px -10px hsl(38 70% 50% / 0.4);
+}
+
+/* MAXSUS TAKLIF (Bundle) - 4-chi karta grid'da */
+.offers-bundle {
+  background: var(--gradient-card);
+  border: 2px solid hsl(var(--gold));
+  border-radius: 1.25rem;
+  padding: 2.5rem 2rem;
+  box-shadow: var(--shadow-soft);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  height: 100%;
+  text-align: center;
+  padding-top: 3.5rem;
+}
+
+.dark .offers-bundle {
+  background: var(--gradient-card);
+  border-color: hsl(var(--gold));
+}
+
+.offers-bundle:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 40px -8px hsl(38 70% 50% / 0.2);
+}
+
+/* Bundle badge - 4-chi karta uchun */
+.offers-bundle::before {
+  content: "⭐ TAVSIYA ETILADI";
+  position: absolute;
+  top: -1rem;
+  left: 50%;
+  transform: translateX(-50%);
+  background: var(--gradient-gold);
+  color: hsl(var(--primary-foreground));
+  padding: 0.5rem 1.5rem;
+  border-radius: 9999px;
+  font-size: 0.875rem;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  box-shadow: var(--shadow-gold);
+  white-space: nowrap;
+}
+
+/* Ensure the bundle occupies its own row below the 3-module row on larger screens */
+@media (min-width: 1024px) {
+  .offers-bundle {
+    grid-column: 1 / -1; /* span full width below the three columns */
+    margin-top: 0.5rem;
+  }
+}
+
+/* On tablet ensure bundle is full width (single row) */
+@media (min-width: 640px) and (max-width: 1023px) {
+  .offers-bundle {
+    grid-column: 1 / -1;
+  }
+}
+
+
+.bundle-icon {
+  font-size: 3rem;
+  margin-bottom: 1rem;
+  display: block;
+}
+
+.bundle-title {
+  font-family: var(--font-serif);
+  font-size: 1.75rem;
+  font-weight: 600;
+  color: hsl(var(--foreground));
+  margin-bottom: 1rem;
+  line-height: 1.3;
+  letter-spacing: -0.025em;
+}
+
+@media (min-width: 1024px) {
+  .bundle-title {
+    font-size: 2rem;
+  }
+}
+
+.bundle-description {
+  color: hsl(var(--muted-foreground));
+  font-size: 1rem;
+  line-height: 1.6;
+  margin-bottom: 1.5rem;
+}
+
+.bundle-pricing {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  margin: 1.5rem 0;
+}
+
+.bundle-price-item {
+  background: transparent;
+  border: none;
+  border-radius: 0;
+  padding: 0;
+}
+
+.bundle-price-label {
+  color: hsl(var(--muted-foreground));
+  font-size: 0.9rem;
+  margin-bottom: 0.25rem;
+}
+
+.bundle-price-value {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: hsl(var(--gold-dark));
+  font-family: var(--font-serif);
+}
+
+.bundle-savings {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: hsl(var(--foreground));
+  margin: 1rem 0;
+  padding: 0.75rem;
+  background: hsl(var(--primary) / 0.1);
+  border: 2px solid hsl(var(--primary));
+  border-radius: 0.75rem;
+}
+
+.bundle-savings-label {
+  display: block;
+  color: hsl(var(--muted-foreground));
+  font-size: 0.85rem;
+  margin-bottom: 0.25rem;
+  font-weight: 500;
+}
+
+.bundle-warning {
+  color: hsl(var(--foreground));
+  font-size: 0.9rem;
+  margin: 1rem 0;
+  font-weight: 600;
+}
+
+.bundle-cta {
+  display: inline-block;
+  background: var(--gradient-gold);
+  color: hsl(var(--primary-foreground));
+  padding: 1rem 2rem;
+  border-radius: 9999px;
+  text-decoration: none;
+  font-weight: 600;
+  margin-top: 1.5rem;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: var(--shadow-gold);
+  font-size: 1rem;
+  border: none;
+  cursor: pointer;
+}
+
+.bundle-cta:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 12px 35px -10px hsl(38 70% 50% / 0.4);
+}
+
+/* Offers section animation */
+@media (prefers-reduced-motion: no-preference) {
+  .offer-card {
+    animation: fadeInUp 0.8s ease-out forwards;
+  }
+  
+  .offer-card:nth-child(1) {
+    animation-delay: 0.1s;
+  }
+  
+  .offer-card:nth-child(2) {
+    animation-delay: 0.2s;
+  }
+  
+  .offer-card:nth-child(3) {
+    animation-delay: 0.3s;
+  }
+  
+  .offer-card:nth-child(4),
+  .offers-bundle {
+    animation: fadeInUp 0.8s ease-out 0.4s forwards;
+    opacity: 0;
+  }
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ========================================
+   OFFERS/PRICING SECTION
+   ======================================== */
+
+.offers-section {
+  background: linear-gradient(135deg, hsl(40 30% 97%) 0%, hsl(40 30% 94%) 100%);
+}
+
+.dark .offers-section {
+  background: linear-gradient(135deg, hsl(30 15% 10%) 0%, hsl(30 15% 8%) 100%);
+}
+
+/* Offers container - 3 column layout */
+.offers-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 2rem;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+/* Base offer card styling */
+.offer-card {
+  position: relative;
+  padding: 2.5rem;
+  border-radius: 1.5rem;
+  background: #ffffff;
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  transition: all 0.4s cubic-bezier(0.2, 0.9, 0.2, 1);
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.dark .offer-card {
+  background: hsl(30 10% 12%);
+  border-color: rgba(255, 255, 255, 0.1);
+}
+
+/* Hover effect - subtle lift */
+.offer-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 12px 24px rgba(217, 151, 38, 0.15);
+  border-color: rgba(217, 151, 38, 0.2);
+}
+
+.dark .offer-card:hover {
+  box-shadow: 0 12px 24px rgba(217, 151, 38, 0.2);
+}
+
+/* Premium/Recommended card */
+.offer-card--premium {
+  position: relative;
+  background: linear-gradient(135deg, hsl(38 70% 55%) 0%, hsl(38 70% 50%) 100%);
+  border: 2px solid hsl(38 70% 50%);
+  color: #fff;
+  transform: scale(1.05);
+  box-shadow: 0 20px 40px rgba(217, 151, 38, 0.3);
+}
+
+.offer-card--premium:hover {
+  transform: scale(1.05) translateY(-8px);
+  box-shadow: 0 25px 50px rgba(217, 151, 38, 0.4);
+}
+
+/* Badge/Label for recommended */
+.offer-badge {
+  position: absolute;
+  top: -12px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem 1.25rem;
+  background: hsl(38 70% 50%);
+  color: #fff;
+  border-radius: 50px;
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+.offer-badge-icon {
+  width: 1rem;
+  height: 1rem;
+  display: inline-block;
+}
+
+/* Offer header */
+.offer-header {
+  margin-bottom: 1.5rem;
+}
+
+.offer-title {
+  font-size: 1.5rem;
+  font-weight: 700;
+  margin: 0 0 0.5rem;
+  color: hsl(30 5% 15%);
+  font-family: "Cormorant Garamond", serif;
+  letter-spacing: -0.02em;
+}
+
+.dark .offer-title {
+  color: #fff;
+}
+
+.offer-card--premium .offer-title {
+  color: #fff;
+}
+
+.offer-subtitle {
+  font-size: 0.875rem;
+  color: hsl(0 0% 50%);
+  margin: 0;
+  font-weight: 500;
+}
+
+.dark .offer-subtitle {
+  color: hsl(0 0% 60%);
+}
+
+.offer-card--premium .offer-subtitle {
+  color: rgba(255, 255, 255, 0.9);
+}
+
+/* Price display */
+.offer-price {
+  display: flex;
+  align-items: baseline;
+  gap: 0.5rem;
+  margin: 1.5rem 0;
+  padding-bottom: 1.5rem;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+}
+
+.dark .offer-price {
+  border-bottom-color: rgba(255, 255, 255, 0.1);
+}
+
+.offer-card--premium .offer-price {
+  border-bottom-color: rgba(255, 255, 255, 0.2);
+}
+
+.offer-amount {
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: hsl(38 70% 50%);
+  font-family: "Cormorant Garamond", serif;
+  line-height: 1;
+}
+
+.dark .offer-amount {
+  color: hsl(38 70% 55%);
+}
+
+.offer-card--premium .offer-amount {
+  color: #fff;
+}
+
+.offer-currency {
+  font-size: 1rem;
+  font-weight: 600;
+  color: hsl(30 5% 40%);
+  margin-right: 0.25rem;
+}
+
+.dark .offer-currency {
+  color: hsl(0 0% 60%);
+}
+
+.offer-card--premium .offer-currency {
+  color: rgba(255, 255, 255, 0.9);
+}
+
+/* Features list */
+.offer-features {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 2rem;
+  flex-grow: 1;
+}
+
+.offer-features li {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.75rem;
+  padding: 0.75rem 0;
+  color: hsl(30 5% 30%);
+  font-size: 0.95rem;
+  line-height: 1.5;
+}
+
+.dark .offer-features li {
+  color: hsl(0 0% 75%);
+}
+
+.offer-card--premium .offer-features li {
+  color: rgba(255, 255, 255, 0.95);
+}
+
+.offer-features li::before {
+  content: "✓";
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 1.25rem;
+  height: 1.25rem;
+  border-radius: 50%;
+  background: hsl(38 70% 50%);
+  color: #fff;
+  font-weight: 700;
+  font-size: 0.75rem;
+  margin-top: 0.1rem;
+}
+
+.offer-card--premium .offer-features li::before {
+  background: rgba(255, 255, 255, 0.2);
+  color: #fff;
+}
+
+/* CTA Button */
+.offer-cta {
+  width: 100%;
+  padding: 1rem 1.5rem;
+  border: 2px solid hsl(38 70% 50%);
+  background: hsl(38 70% 50%);
+  color: #fff;
+  border-radius: 0.75rem;
+  font-size: 1rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  font-family: inherit;
+}
+
+.offer-cta:hover {
+  background: hsl(38 70% 45%);
+  border-color: hsl(38 70% 45%);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 16px rgba(217, 151, 38, 0.25);
+}
+
+.offer-cta:active {
+  transform: translateY(0);
+}
+
+/* Premium card button - inverted colors */
+.offer-card--premium .offer-cta {
+  background: #fff;
+  color: hsl(38 70% 50%);
+  border-color: #fff;
+}
+
+.offer-card--premium .offer-cta:hover {
+  background: hsl(0 0% 95%);
+  border-color: hsl(0 0% 95%);
+  box-shadow: 0 8px 16px rgba(255, 255, 255, 0.25);
+}
+
+/* Closing message */
+.offers-closing {
+  margin-top: 3rem;
+  padding: 2rem;
+  border-radius: 1rem;
+  background: rgba(217, 151, 38, 0.05);
+  border: 1px solid rgba(217, 151, 38, 0.15);
+  text-align: center;
+}
+
+.dark .offers-closing {
+  background: rgba(217, 151, 38, 0.08);
+  border-color: rgba(217, 151, 38, 0.2);
+}
+
+.offers-closing p {
+  font-size: 1.1rem;
+  color: hsl(30 5% 25%);
+  margin: 0;
+  line-height: 1.6;
+}
+
+.dark .offers-closing p {
+  color: hsl(0 0% 75%);
+}
+
+.offers-closing em {
+  font-style: normal;
+  font-weight: 700;
+  color: hsl(38 70% 50%);
+}
+
+.dark .offers-closing em {
+  color: hsl(38 70% 55%);
+}
+
+/* Mobile responsiveness */
+@media (max-width: 768px) {
+  .offers-container {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+
+  .offer-card--premium {
+    transform: scale(1);
+  }
+
+  .offer-card--premium:hover {
+    transform: translateY(-8px);
+  }
+
+  .offer-card {
+    padding: 2rem;
+  }
+
+  .offer-title {
+    font-size: 1.25rem;
+  }
+
+  .offer-amount {
+    font-size: 2rem;
+  }
+
+  .offer-features li {
+    font-size: 0.9rem;
+  }
+
+  .offers-closing {
+    padding: 1.5rem;
+  }
+
+  .offers-closing p {
+    font-size: 1rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .offer-card {
+    padding: 1.5rem;
+  }
+
+  .offer-title {
+    font-size: 1.1rem;
+  }
+
+  .offer-amount {
+    font-size: 1.75rem;
+  }
+
+  .offer-cta {
+    padding: 0.875rem 1.25rem;
+    font-size: 0.95rem;
+  }
+
+  .offer-badge {
+    font-size: 0.65rem;
+    padding: 0.4rem 1rem;
+    top: -10px;
+  }
+}
+
+/* ========================================
+   OFFERS: Hover effects + special bundle highlight
+   ======================================== */
+
+/* Smooth transitions and lift for all offer cards */
+.offer-card {
+  transition: transform 260ms cubic-bezier(.2,.9,.2,1), box-shadow 260ms ease, border-color 260ms ease;
+  will-change: transform, box-shadow;
+}
+
+.offer-card:hover,
+.offer-card:focus-within {
+  transform: translateY(-8px);
+  box-shadow: 0 20px 50px rgba(17,24,39,0.12);
+  border-color: rgba(217,151,38,0.18);
+}
+
+.offer-card:active {
+  transform: translateY(-2px);
+}
+
+/* Keyboard focus visible state */
+.offer-card:focus-within {
+  outline: 3px solid rgba(217,151,38,0.12);
+  outline-offset: 6px;
+}
+
+/* Make CTA stand out on hover inside a card */
+.offer-card:hover .offer-cta {
+  transform: translateY(-2px);
+}
+
+/* Special styling for the bundle to make it visually distinct */
+.offers-bundle {
+  position: relative;
+  z-index: 2;
+  background: linear-gradient(135deg, #D99726 0%, #F7F5F0 25%, #F7F5F0 50%, #F7F5F0 75%, #D99726 100%);
+  color: hsl(var(--foreground));
+  border: 2px solid hsl(var(--gold));
+  box-shadow: 0 28px 70px rgba(243,122,11,0.18);
+  transform: translateZ(0);
+}
+
+.offers-bundle::before {
+  /* Slightly larger badge for emphasis */
+  font-size: 0.95rem;
+  padding: 0.6rem 1.6rem;
+  top: -1.25rem;
+}
+
+/* Soft glowing halo behind bundle (non-intrusive) */
+.offers-bundle::after {
+  content: "";
+  position: absolute;
+  inset: -6px;
+  border-radius: inherit;
+  background: radial-gradient(60% 60% at 50% 20%, rgba(243,122,11,0.18), transparent 40%);
+  filter: blur(14px);
+  z-index: -1;
+  pointer-events: none;
+}
+
+.offers-bundle:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 40px 110px rgba(243,122,11,0.22);
+}
+
+/* Ensure the glow/animation respects reduced-motion */
+@media (prefers-reduced-motion: reduce) {
+  .offer-card,
+  .offers-bundle {
+    transition: none !important;
+  }
+
+  .offers-bundle::after {
+    display: none;
+  }
+}
+
