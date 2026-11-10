@@ -1,81 +1,65 @@
-// Minimal setup: assign data-aos attributes to common elements and init AOS
+// Professional AOS (Animate On Scroll) Setup
 (function () {
-  function applyAOS() {
-    var prefersReduced = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  'use strict';
 
-    // Helper to set attribute if element exists
+  function applyAOS() {
+    const prefersReduced = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const isMobile = window.innerWidth < 768;
+
     function setAOS(el, name, delay) {
-      if (!el) return;
+      if (!el || el.hasAttribute('data-aos')) return;
       el.setAttribute('data-aos', name);
       if (typeof delay === 'number') el.setAttribute('data-aos-delay', String(delay));
     }
 
-    // Hero: title, subtitle, CTA
-    var heroTitle = document.querySelector('.heading-hero');
-    var heroSection = heroTitle && heroTitle.closest('section');
-    if (heroTitle) setAOS(heroTitle, 'fade-up');
+    // Hero section
+    const heroTitle = document.querySelector('.heading-hero');
+    const heroSection = heroTitle && heroTitle.closest('section');
+    if (heroTitle) setAOS(heroTitle, 'fade-up', 50);
     if (heroSection) {
-      // subtitle and lead inside hero
-      var heroLead = heroSection.querySelector('.text-lead');
-      var heroCTA = heroSection.querySelector('.btn-primary');
-      if (heroLead) setAOS(heroLead, 'fade-up', 80);
-      if (heroCTA) setAOS(heroCTA, 'fade-up', 140);
+      const heroLead = heroSection.querySelector('.text-lead');
+      const heroCTA = heroSection.querySelector('.btn-primary');
+      if (heroLead) setAOS(heroLead, 'fade-up', 100);
+      if (heroCTA) setAOS(heroCTA, 'fade-up', 150);
     }
 
-    // Section titles and text blocks
-    document.querySelectorAll('.heading-section').forEach(function (h) { setAOS(h, 'fade-up'); });
-    document.querySelectorAll('.container .text-lead, .container .text-body, .container p').forEach(function (p) {
-      // only set if not a heading
-      if (p.closest('.heading-section')) return;
-      setAOS(p, 'fade-up');
+    // Section headings
+    document.querySelectorAll('.heading-section').forEach(function (h) {
+      setAOS(h, 'fade-up', 50);
     });
 
-    // CTA buttons site-wide
-    document.querySelectorAll('.btn-primary').forEach(function (b) { setAOS(b, 'fade-up'); });
-
-    // Cards in 3-step journey: target .card-module (first, second, third)
-    var journeyCards = Array.from(document.querySelectorAll('.card-module'));
-    if (journeyCards.length >= 3) {
-      setAOS(journeyCards[0], 'fade-right');
-      setAOS(journeyCards[1], 'fade-up');
-      setAOS(journeyCards[2], 'fade-left');
-    } else if (journeyCards.length > 0) {
-      // Fallback: assign sequential directions
+    // Journey cards: on mobile use vertical fade-up to avoid horizontal overflow
+    const journeyCards = Array.from(document.querySelectorAll('.card-module'));
+    if (!isMobile && journeyCards.length >= 3) {
+      setAOS(journeyCards[0], 'fade-right', 100);
+      setAOS(journeyCards[1], 'fade-up', 200);
+      setAOS(journeyCards[2], 'fade-left', 300);
+    } else {
       journeyCards.forEach(function (c, i) {
-        var name = i === 0 ? 'fade-right' : i === 1 ? 'fade-up' : 'fade-left';
-        setAOS(c, name, i * 80);
+        setAOS(c, 'fade-up', (i % 3) * 100);
       });
     }
 
-    // Benefits & bonus cards: pick likely card containers
-    var benefitSelectors = ['.card-spiritual', '.bg-card', '.card-module', '.p-8.rounded-3xl'];
-    var benefits = [];
-    benefitSelectors.forEach(function (sel) {
-      document.querySelectorAll(sel).forEach(function (el) { benefits.push(el); });
+    // Spiritual / Benefit cards
+    const benefitCards = document.querySelectorAll('.card-spiritual, .bg-card, .p-8.rounded-3xl');
+    benefitCards.forEach(function (el, i) {
+      setAOS(el, 'fade-up', (i % 3) * 100);
     });
-    // Remove duplicates
-    benefits = Array.from(new Set(benefits));
-    benefits.forEach(function (el, i) { setAOS(el, 'fade-up', i * 60); });
 
-    // FAQ items: target accordion items — common class patterns used in markup
+    // FAQ items
     document.querySelectorAll('.space-y-4 > *').forEach(function (el, i) {
-      // small safeguard: only target items that look like FAQ cards (have padding/border)
-      var s = window.getComputedStyle(el);
-      if (parseFloat(s.paddingTop) > 0 || parseFloat(s.borderTopWidth) > 0) setAOS(el, 'fade-up', i * 50);
+      setAOS(el, 'fade-up', (i % 4) * 80);
     });
 
-    // Respect prefers-reduced-motion: disable AOS if user requested reduced motion
-    // We'll initialize AOS with disable option below too.
-
-    // Initialize AOS if available
+    // Init AOS
     function initAOS() {
       if (window.AOS && typeof window.AOS.init === 'function') {
         window.AOS.init({
-          duration: 600,
-          easing: 'ease-out',
+          duration: 650,
+          easing: 'ease-out-cubic',
           once: true,
-          offset: 120,
-          // disable if prefers-reduced-motion
+          offset: 80,
+          disableMutationObserver: false,
           disable: function () {
             return prefersReduced;
           }
@@ -83,18 +67,37 @@
       }
     }
 
-    // If AOS already loaded, init immediately, otherwise wait for it
-    if (window.AOS) initAOS();
-    else {
-      // observe for script load
-      var check = function () {
-        if (window.AOS) { initAOS(); }
-        else setTimeout(check, 50);
-      };
-      check();
+    if (window.AOS) {
+      initAOS();
+    } else {
+      let checkAttempts = 0;
+      const interval = setInterval(function () {
+        checkAttempts++;
+        if (window.AOS) {
+          clearInterval(interval);
+          initAOS();
+        } else if (checkAttempts > 50) {
+          clearInterval(interval);
+        }
+      }, 50);
     }
   }
 
-  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', applyAOS);
-  else applyAOS();
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', applyAOS);
+  } else {
+    applyAOS();
+  }
+
+  // Observe React additions
+  const root = document.getElementById('root');
+  if (root) {
+    const mo = new MutationObserver(function () {
+      applyAOS();
+      if (window.AOS && typeof window.AOS.refresh === 'function') {
+        window.AOS.refresh();
+      }
+    });
+    mo.observe(root, { childList: true, subtree: true });
+  }
 })();

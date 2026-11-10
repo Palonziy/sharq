@@ -1,0 +1,30 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64">
+  <defs>
+    <linearGradient id="gold" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#D99726"/>
+      <stop offset="50%" stop-color="#F5B942"/>
+      <stop offset="100%" stop-color="#B37410"/>
+    </linearGradient>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#FAF7F2"/>
+      <stop offset="100%" stop-color="#EDE6D8"/>
+    </linearGradient>
+  </defs>
+  <rect width="64" height="64" rx="16" fill="url(#bg)"/>
+  <rect width="60" height="60" x="2" y="2" rx="14" fill="none" stroke="url(#gold)" stroke-width="1.5" stroke-opacity="0.5"/>
+  <!-- Spiritual Lotus / Flame Emblem -->
+  <g transform="translate(32, 34)">
+    <!-- Central petal / flame -->
+    <path d="M 0,-18 C -5,-8 -4,2 0,8 C 4,2 5,-8 0,-18 Z" fill="url(#gold)"/>
+    <!-- Left petal -->
+    <path d="M -3,-10 C -12,-5 -14,4 -3,7 C -7,2 -7,-5 -3,-10 Z" fill="url(#gold)" opacity="0.85"/>
+    <!-- Right petal -->
+    <path d="M 3,-10 C 12,-5 14,4 3,7 C 7,2 7,-5 3,-10 Z" fill="url(#gold)" opacity="0.85"/>
+    <!-- Outer left petal -->
+    <path d="M -6,0 C -18,2 -16,10 -3,9 C -9,7 -10,3 -6,0 Z" fill="url(#gold)" opacity="0.65"/>
+    <!-- Outer right petal -->
+    <path d="M 6,0 C 18,2 16,10 3,9 C 9,7 10,3 6,0 Z" fill="url(#gold)" opacity="0.65"/>
+    <!-- Center star sparkle -->
+    <circle cx="0" cy="-21" r="1.5" fill="#D99726"/>
+  </g>
+</svg>

@@ -2,72 +2,60 @@
     'use strict';
 
     /**
-     * SITE PROTECTION & ANTI-INSPECTION
-     * Designed for Poklanish Website
+     * LIGHTWEIGHT CLIENT PROTECTION & INTEGRITY
+     * Designed for 40 Kunlik Poklanish
      */
 
-    // 1. Disable Right Click
+    // 1. Clickjacking protection: ensure page is not framed maliciously
+    try {
+        if (window.top !== window.self) {
+            window.top.location = window.self.location;
+        }
+    } catch (e) {
+        // Sandboxed iframe protection
+    }
+
+    // 2. Protect sensitive media (videos and branding images) from casual direct saving
     document.addEventListener('contextmenu', function (e) {
-        e.preventDefault();
+        if (e.target && (e.target.tagName === 'VIDEO' || e.target.tagName === 'IMG' || e.target.closest('video, .mentoring-video-wrapper'))) {
+            e.preventDefault();
+        }
     }, false);
 
-    // 2. Disable Keyboard Shortcuts (F12, Ctrl+Shift+I, etc.)
+    // 3. Prevent casual source viewing and dev shortcuts using modern standards
     document.addEventListener('keydown', function (e) {
-        // F12
-        if (e.keyCode === 123) {
+        // Check for F12
+        if (e.key === 'F12') {
             e.preventDefault();
             return false;
         }
-        // Ctrl+Shift+I (Inspect)
-        // Ctrl+Shift+J (Console)
-        // Ctrl+Shift+C (Elements)
-        if (e.ctrlKey && e.shiftKey && (e.keyCode === 73 || e.keyCode === 74 || e.keyCode === 67)) {
+
+        // Ctrl/Cmd + Shift + I/J/C
+        const isMod = e.ctrlKey || e.metaKey;
+        if (isMod && e.shiftKey && (e.key === 'I' || e.key === 'i' || e.key === 'J' || e.key === 'j' || e.key === 'C' || e.key === 'c')) {
             e.preventDefault();
             return false;
         }
-        // Ctrl+U (View Source)
-        if (e.ctrlKey && e.keyCode === 85) {
+
+        // Ctrl/Cmd + U (View Source)
+        if (isMod && (e.key === 'U' || e.key === 'u')) {
             e.preventDefault();
             return false;
         }
-        // Ctrl+S (Save Page)
-        if (e.ctrlKey && e.keyCode === 83) {
+
+        // Ctrl/Cmd + S (Save Page)
+        if (isMod && (e.key === 'S' || e.key === 's')) {
             e.preventDefault();
             return false;
         }
     }, false);
 
-    // 3. Anti-DevTools Debugger Loop
-    // This helps trigger a breakpoint if DevTools is open, making inspection annoying
-    function startDebuggerLoop() {
-        try {
-            (function () {
-                (function d(i) {
-                    if (("" + i / i).length !== 1 || i % 20 === 0) {
-                        (function () { }).constructor("debugger")();
-                    } else {
-                        debugger;
-                    }
-                    d(++i);
-                })(0);
-            })();
-        } catch (e) {
-            setTimeout(startDebuggerLoop, 1000);
-        }
+    // 4. Console greeting & brand attribution
+    if (typeof console !== 'undefined' && console.log) {
+        console.log(
+            '%c40 Kunlik Poklanish %c| palo.uz © 2026',
+            'background: #D99726; color: #fff; font-weight: bold; padding: 4px 8px; border-radius: 4px;',
+            'color: #888; font-weight: 500;'
+        );
     }
-
-    // Only run if not locally hosted to avoid development headaches
-    if (window.location.hostname !== 'localhost' && window.location.hostname !== '127.0.0.1') {
-        startDebuggerLoop();
-    }
-
-    // 4. Basic CLI Bot Deterrent
-    // Blocks common command-line scrapers
-    const botList = ['wget', 'curl', 'python', 'go-http-client', 'postman', 'insomnia'];
-    const userAgent = navigator.userAgent.toLowerCase();
-    if (botList.some(bot => userAgent.includes(bot))) {
-        window.stop();
-        document.documentElement.innerHTML = "<h1>Kirish taqiqlangan</h1><p>Avtomatlashtirilgan so'rovlar qabul qilinmaydi.</p>";
-    }
-
 })();
