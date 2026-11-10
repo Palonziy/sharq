@@ -39,7 +39,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
         <div class="footer-bottom-row">
           <p class="footer-copyright">40 Kunlik Poklanish &copy; 2026. Barcha huquqlar himoyalangan.</p>
-          <a href="https://palo.uz" target="_blank" rel="noopener noreferrer" class="footer-author">Crafted with care by <strong>palo.uz</strong></a>
+          <a href="https://palosite.com" target="_blank" rel="noopener noreferrer" class="footer-author">Crafted with care by <strong>palosite.com</strong></a>
         </div>
       </div>
     `;

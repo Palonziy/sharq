@@ -53,7 +53,7 @@
     // 4. Console greeting & brand attribution
     if (typeof console !== 'undefined' && console.log) {
         console.log(
-            '%c40 Kunlik Poklanish %c| palo.uz © 2026',
+            '%c40 Kunlik Poklanish %c| palosite.com © 2026',
             'background: #D99726; color: #fff; font-weight: bold; padding: 4px 8px; border-radius: 4px;',
             'color: #888; font-weight: 500;'
         );

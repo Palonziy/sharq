@@ -99,8 +99,8 @@ Loyiha to'liq statik (Zero Dependency at Runtime) bo'lib, quyidagi platformalarg
 
 ## 👥 Mualliflik va Rahmatnomalar
 
-- **Loyihani tayyorlagan:** **palo.uz** jamoasi (2026)
+- **Loyihani tayyorlagan:** **palosite.com** jamoasi (2026)
 - **Muallif va mentor:** Surayyo Aziz
 - **Texnik yo'nalish:** Ogabek Razzoqov ([@Palonziy](https://github.com/Palonziy))
 
-*© 2026 palo.uz — Mukammallik, mehr va professionalizm bilan yaratildi.*
+*© 2026 palosite.com — Mukammallik, mehr va professionalizm bilan yaratildi.*
