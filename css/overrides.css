@@ -394,45 +394,149 @@ footer:not(#site-footer) {
   animation: bounce 1.5s infinite;
 }
 
-/* Video Retry Banner */
-.video-retry-banner {
+/* Video Buffer & Preload Progress Indicator */
+.video-loading-indicator {
   position: absolute;
   inset: 0;
-  background: rgba(15, 12, 10, 0.9);
+  background: rgba(10, 8, 6, 0.75);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  padding: 2rem;
+  gap: 0.85rem;
+  z-index: 18;
+  color: #fff;
+  transition: opacity 0.3s ease;
+}
+
+.video-spinner {
+  width: 44px;
+  height: 44px;
+  border: 3px solid rgba(217, 151, 38, 0.25);
+  border-top-color: hsl(var(--gold));
+  border-radius: 50%;
+  animation: video-spin 0.9s linear infinite;
+}
+
+@keyframes video-spin {
+  to { transform: rotate(360deg); }
+}
+
+.video-loading-text {
+  font-family: var(--font-sans);
+  font-size: 0.85rem;
+  font-weight: 500;
+  color: hsl(var(--gold-light));
+  letter-spacing: 0.02em;
+}
+
+.video-progress-track {
+  width: 140px;
+  height: 4px;
+  background: rgba(255, 255, 255, 0.15);
+  border-radius: 9999px;
+  overflow: hidden;
+}
+
+.video-progress-bar {
+  height: 100%;
+  background: var(--gradient-gold);
+  border-radius: 9999px;
+  transition: width 0.2s ease;
+}
+
+/* Luxury Video Retry Banner */
+.video-retry-banner {
+  position: absolute;
+  inset: 0;
+  background: rgba(12, 10, 8, 0.92);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 1.5rem;
   text-align: center;
   color: #fff;
-  z-index: 20;
+  z-index: 25;
+  animation: fadeIn 0.3s ease;
+}
+
+.video-retry-icon {
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  background: rgba(217, 151, 38, 0.12);
+  border: 1px solid rgba(217, 151, 38, 0.35);
+  color: hsl(var(--gold));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 0.75rem;
+}
+
+.video-retry-title {
+  font-family: var(--font-serif);
+  font-size: 1.05rem;
+  font-weight: 600;
+  color: #fff;
+  margin: 0 0 0.35rem 0;
+}
+
+.video-retry-subtitle {
+  font-size: 0.8rem;
+  color: rgba(255, 255, 255, 0.65);
+  margin: 0 0 1.25rem 0;
+  max-width: 260px;
+  line-height: 1.35;
 }
 
 .video-retry-actions {
   display: flex;
-  gap: 0.75rem;
-  margin-top: 1rem;
+  flex-direction: column;
+  gap: 0.6rem;
+  width: 100%;
+  max-width: 220px;
 }
 
 .video-retry-btn, .video-retry-yt {
-  padding: 0.6rem 1.25rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.7rem 1.2rem;
   border-radius: 9999px;
   font-size: 0.85rem;
   font-weight: 600;
   text-decoration: none;
   cursor: pointer;
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .video-retry-btn {
   background: var(--gradient-gold);
   color: #fff;
   border: none;
+  box-shadow: 0 6px 18px rgba(217, 151, 38, 0.4);
+}
+
+.video-retry-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 24px rgba(217, 151, 38, 0.6);
 }
 
 .video-retry-yt {
-  background: #FF0000;
+  background: rgba(255, 255, 255, 0.08);
   color: #fff !important;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.video-retry-yt:hover {
+  background: #FF0000;
+  border-color: #FF0000;
+  transform: translateY(-2px);
 }
 
 /* --------------------------------------------------------------------------

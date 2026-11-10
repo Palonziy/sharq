@@ -64,13 +64,13 @@ sharq/
 
 Loyihani istalgan statik server orqali ishga tushirish mumkin:
 
-### Python orqali:
+### Python orqali (Tavsiya etiladi - Video streaming va Range 206 qo'llab-quvvatlaydi):
 ```bash
 # sharq papkasiga kiring
 cd sharq
 
-# 8080-portda serverni yoqing
-python -m http.server 8080
+# 8080-portda serverni yoqing (Video seeking va Range qo'llab-quvvatlaydi)
+python serve.py 8080
 ```
 Brauzerda: `http://localhost:8080/` yoki `http://localhost:8080/index.html`
 
