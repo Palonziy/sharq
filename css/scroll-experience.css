@@ -1,0 +1,423 @@
+/* ==========================================================================
+   40 KUNLIK POKLANISH - PREMIUM SCROLL & INTERACTIVE EXPERIENCE
+   Designed for palosite.com | Atmospheric Sanctuary & Living Flow
+   ========================================================================== */
+
+/* --------------------------------------------------------------------------
+   1. Ultra-Slim Golden Scroll Progress Bar
+   -------------------------------------------------------------------------- */
+#scroll-progress-line {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 3px;
+  background: linear-gradient(90deg, #D99726 0%, #F5CE7A 50%, #D99726 100%);
+  transform-origin: 0% 50%;
+  transform: scaleX(0);
+  box-shadow: 0 0 14px rgba(217, 151, 38, 0.85);
+  z-index: 10000;
+  pointer-events: none;
+  transition: transform 0.08s ease-out;
+}
+
+/* --------------------------------------------------------------------------
+   2. Celestial Stardust Ambient Background Canvas
+   -------------------------------------------------------------------------- */
+#stardust-canvas {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  pointer-events: none;
+  z-index: 0;
+  opacity: 0.55;
+}
+
+.dark #stardust-canvas {
+  opacity: 0.75;
+}
+
+/* --------------------------------------------------------------------------
+   3. Floating Vertical Journey Dots (Desktop Navigation Indicator)
+   -------------------------------------------------------------------------- */
+.floating-journey-nav {
+  position: fixed;
+  right: 1.75rem;
+  top: 50%;
+  transform: translateY(-50%);
+  display: flex;
+  flex-direction: column;
+  gap: 1.15rem;
+  z-index: 950;
+  padding: 0.9rem 0.55rem;
+  border-radius: 9999px;
+  background: rgba(250, 247, 242, 0.75);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(217, 151, 38, 0.25);
+  box-shadow: 0 12px 35px -5px rgba(45, 30, 10, 0.08);
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.dark .floating-journey-nav {
+  background: rgba(26, 22, 18, 0.75);
+  border-color: rgba(217, 151, 38, 0.2);
+  box-shadow: 0 12px 35px -5px rgba(0, 0, 0, 0.4);
+}
+
+.floating-journey-nav.is-visible {
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+}
+
+.journey-dot {
+  position: relative;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: rgba(217, 151, 38, 0.3);
+  border: 1.5px solid transparent;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.journey-dot:hover,
+.journey-dot.is-active {
+  background: #D99726;
+  border-color: #F5CE7A;
+  transform: scale(1.4);
+  box-shadow: 0 0 12px rgba(217, 151, 38, 0.85);
+}
+
+.journey-dot-tooltip {
+  position: absolute;
+  right: calc(100% + 0.9rem);
+  top: 50%;
+  transform: translateY(-50%) translateX(6px);
+  background: rgba(18, 14, 11, 0.92);
+  backdrop-filter: blur(12px);
+  color: #fff;
+  padding: 0.35rem 0.75rem;
+  border-radius: 9999px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.03em;
+  white-space: nowrap;
+  pointer-events: none;
+  opacity: 0;
+  visibility: hidden;
+  border: 1px solid rgba(217, 151, 38, 0.3);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.journey-dot:hover .journey-dot-tooltip {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(-50%) translateX(0);
+}
+
+@media (max-width: 1024px) {
+  .floating-journey-nav {
+    display: none !important;
+  }
+}
+
+/* --------------------------------------------------------------------------
+   4. Atmospheric Section Backdrops & Aura Breathing
+   -------------------------------------------------------------------------- */
+/* Hero Living Aura */
+.hero-atmosphere {
+  position: relative;
+}
+
+.hero-atmosphere::before {
+  content: "";
+  position: absolute;
+  top: 25%;
+  left: 50%;
+  transform: translate(-50%, -30%);
+  width: 720px;
+  height: 720px;
+  max-width: 95vw;
+  background: radial-gradient(circle, rgba(217, 151, 38, 0.16) 0%, rgba(245, 206, 122, 0.06) 45%, transparent 70%);
+  filter: blur(50px);
+  pointer-events: none;
+  z-index: 0;
+  animation: aura-breathe 9s infinite ease-in-out;
+}
+
+@keyframes aura-breathe {
+  0%, 100% { transform: translate(-50%, -30%) scale(1); opacity: 0.7; }
+  50% { transform: translate(-50%, -30%) scale(1.18); opacity: 1; }
+}
+
+/* Pain Points / Meditative Deep Section */
+.empathy-atmosphere {
+  position: relative;
+  background: radial-gradient(ellipse at 50% 40%, rgba(238, 230, 218, 0.45) 0%, rgba(230, 220, 204, 0.15) 80%) !important;
+}
+
+.dark .empathy-atmosphere {
+  background: radial-gradient(ellipse at 50% 40%, rgba(35, 29, 23, 0.6) 0%, rgba(20, 17, 14, 0.2) 80%) !important;
+}
+
+/* 3 Pillars Section Glow Thread */
+.pillars-atmosphere {
+  position: relative;
+  background: linear-gradient(180deg, transparent 0%, rgba(217, 151, 38, 0.05) 50%, transparent 100%);
+}
+
+/* Mentoring Golden Vignette */
+.mentoring-atmosphere {
+  position: relative;
+}
+
+.mentoring-atmosphere::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 30%;
+  transform: translate(-50%, -50%);
+  width: 500px;
+  height: 500px;
+  background: radial-gradient(circle, rgba(217, 151, 38, 0.14) 0%, transparent 70%);
+  filter: blur(60px);
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* --------------------------------------------------------------------------
+   5. Interactive 3D Tilt & Magnetic Mouse Spotlight
+   -------------------------------------------------------------------------- */
+.luxury-card-interactive {
+  position: relative;
+  overflow: hidden;
+  transform-style: preserve-3d;
+  transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.3s ease;
+  will-change: transform;
+}
+
+.luxury-card-interactive::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: radial-gradient(550px circle at var(--mouse-x, 50%) var(--mouse-y, 50%), rgba(217, 151, 38, 0.14), transparent 45%);
+  opacity: 0;
+  transition: opacity 0.4s ease;
+  pointer-events: none;
+  z-index: 2;
+}
+
+.luxury-card-interactive:hover::after {
+  opacity: 1;
+}
+
+.luxury-card-interactive:hover {
+  box-shadow: 0 24px 55px -12px rgba(217, 151, 38, 0.32);
+}
+
+/* --------------------------------------------------------------------------
+   6. Golden Journey Roadmap Connecting Line (3 Bosqich)
+   -------------------------------------------------------------------------- */
+.journey-thread-track {
+  position: relative;
+  margin: 3.5rem auto 1rem;
+  max-width: 900px;
+  padding: 0 1rem;
+}
+
+.journey-thread-line {
+  position: absolute;
+  top: 24px;
+  left: 8%;
+  right: 8%;
+  height: 3px;
+  background: rgba(217, 151, 38, 0.2);
+  border-radius: 9999px;
+  z-index: 1;
+}
+
+.journey-thread-fill {
+  height: 100%;
+  width: 0%;
+  background: linear-gradient(90deg, #D99726 0%, #F5CE7A 100%);
+  border-radius: 9999px;
+  box-shadow: 0 0 12px rgba(217, 151, 38, 0.8);
+  transition: width 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.journey-nodes-row {
+  display: flex;
+  justify-content: space-between;
+  position: relative;
+  z-index: 2;
+}
+
+.journey-node {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  cursor: pointer;
+  text-decoration: none;
+  color: inherit;
+  width: 140px;
+}
+
+.journey-node-badge {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background: hsl(var(--card));
+  border: 2px solid rgba(217, 151, 38, 0.35);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-serif);
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: hsl(var(--foreground));
+  margin-bottom: 0.65rem;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+  transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.journey-node.is-active .journey-node-badge {
+  background: var(--gradient-gold);
+  border-color: #F5CE7A;
+  color: #fff;
+  transform: scale(1.15);
+  box-shadow: 0 0 22px rgba(217, 151, 38, 0.7);
+}
+
+.journey-node-title {
+  font-family: var(--font-serif);
+  font-size: 1.05rem;
+  font-weight: 600;
+  color: hsl(var(--foreground));
+  margin-bottom: 0.2rem;
+}
+
+.journey-node-days {
+  font-size: 0.75rem;
+  color: hsl(var(--gold-dark));
+  font-weight: 600;
+  letter-spacing: 0.04em;
+}
+
+@media (max-width: 640px) {
+  .journey-thread-track {
+    display: none;
+  }
+}
+
+/* --------------------------------------------------------------------------
+   7. Smooth Section Edge Glow Dividers
+   -------------------------------------------------------------------------- */
+.section-glow-divider {
+  position: absolute;
+  left: 0;
+  right: 0;
+  height: 60px;
+  pointer-events: none;
+  z-index: 3;
+}
+
+.section-glow-divider-top {
+  top: 0;
+  background: linear-gradient(to bottom, rgba(217, 151, 38, 0.07), transparent);
+}
+
+.section-glow-divider-bottom {
+  bottom: 0;
+  background: linear-gradient(to top, rgba(217, 151, 38, 0.07), transparent);
+}
+
+/* --------------------------------------------------------------------------
+   8. Animated Metric Counters
+   -------------------------------------------------------------------------- */
+.counter-value {
+  display: inline-block;
+  font-feature-settings: "tnum";
+  font-variant-numeric: tabular-nums;
+  transition: transform 0.3s ease;
+}
+
+/* --------------------------------------------------------------------------
+   9. Floating Celestial Badge
+   -------------------------------------------------------------------------- */
+.hero-celestial-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.45rem 1.15rem;
+  border-radius: 9999px;
+  background: rgba(217, 151, 38, 0.1);
+  border: 1px solid rgba(217, 151, 38, 0.3);
+  color: hsl(var(--gold-dark));
+  font-size: 0.85rem;
+  font-weight: 600;
+  letter-spacing: 0.03em;
+  margin-bottom: 1.25rem;
+  backdrop-filter: blur(8px);
+  box-shadow: 0 4px 18px rgba(217, 151, 38, 0.15);
+  animation: badge-float 4s infinite ease-in-out;
+}
+
+@keyframes badge-float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-4px); }
+}
+
+.hero-badge-pulse-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #D99726;
+  box-shadow: 0 0 10px #D99726;
+  animation: pulse-ring 2s infinite;
+}
+
+@keyframes pulse-ring {
+  0% { transform: scale(0.9); opacity: 0.9; }
+  50% { transform: scale(1.3); opacity: 0.5; }
+  100% { transform: scale(0.9); opacity: 0.9; }
+}
+
+/* --------------------------------------------------------------------------
+   10. Interactive FAQ Glowing Active State
+   -------------------------------------------------------------------------- */
+[data-state="open"] {
+  border-color: hsl(var(--gold)) !important;
+  box-shadow: 0 12px 35px -8px rgba(217, 151, 38, 0.25) !important;
+  background: linear-gradient(180deg, hsl(var(--card)) 0%, hsl(var(--cream-dark) / 0.5) 100%) !important;
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1) !important;
+}
+
+.dark [data-state="open"] {
+  background: linear-gradient(180deg, hsl(30 15% 15%) 0%, hsl(30 15% 12%) 100%) !important;
+  box-shadow: 0 12px 35px -8px rgba(217, 151, 38, 0.35) !important;
+}
+
+/* --------------------------------------------------------------------------
+   11. Smooth Momentum & Touch Device Graceful Degradation
+   -------------------------------------------------------------------------- */
+@media (hover: none) and (pointer: coarse) {
+  .luxury-card-interactive {
+    transform: none !important;
+    transition: transform 0.2s ease !important;
+  }
+  .luxury-card-interactive:active {
+    transform: scale(0.985) !important;
+  }
+}
