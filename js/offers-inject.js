@@ -120,6 +120,12 @@
           
             <!-- MAXSUS TAKLIF (Bundle) - 4-chi karta -->
             <div class="offers-bundle offer-card" data-aos="fade-up" data-aos-delay="400">
+              <!-- First-class HTML Badge that never clips or overflows -->
+              <div class="bundle-badge">
+                <span class="bundle-badge-star">⭐</span>
+                <span>ENG OMMABOP VA ENG FOYDALI PAKET</span>
+              </div>
+
               <span class="bundle-icon">🔥</span>
               <h3 class="bundle-title">MAXSUS TAKLIF (TO'LIQ BUNDLE)</h3>
               

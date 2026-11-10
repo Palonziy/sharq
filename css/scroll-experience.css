@@ -207,6 +207,10 @@
   will-change: transform;
 }
 
+.offers-bundle.luxury-card-interactive {
+  overflow: visible !important;
+}
+
 .luxury-card-interactive::after {
   content: "";
   position: absolute;
@@ -317,7 +321,28 @@
 
 @media (max-width: 640px) {
   .journey-thread-track {
-    display: none;
+    margin: 2rem auto 0.75rem;
+    padding: 0 0.5rem;
+  }
+  .journey-thread-line {
+    top: 18px;
+    left: 10%;
+    right: 10%;
+  }
+  .journey-node {
+    width: 90px;
+  }
+  .journey-node-badge {
+    width: 36px;
+    height: 36px;
+    font-size: 0.95rem;
+    margin-bottom: 0.35rem;
+  }
+  .journey-node-title {
+    font-size: 0.825rem;
+  }
+  .journey-node-days {
+    font-size: 0.65rem;
   }
 }
 
